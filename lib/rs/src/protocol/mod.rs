@@ -916,6 +916,13 @@ pub fn field_id(field_ident: &TFieldIdentifier) -> crate::Result<i16> {
     })
 }
 
+pub trait TObject {
+    fn read_from_in_protocol(i_prot: &mut dyn TInputProtocol) -> crate::Result<Self>
+        where
+            Self: Sized;
+    fn write_to_out_protocol(&self, o_prot: &mut dyn TOutputProtocol) -> crate::Result<()>;
+}
+
 #[cfg(test)]
 mod tests {
 
